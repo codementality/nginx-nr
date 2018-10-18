@@ -1,17 +1,15 @@
-FROM debian:jessie
+FROM debian:stretch
 
-MAINTAINER Lisa Ridley "lhridley@gmail.com"
+MAINTAINER Lisa Ridley "lisa@codementality.com"
 
-ENV NGINX_VERSION 1.10.2-1~jessie
-
-RUN apt-get update && apt-get install curl ca-certificates --no-install-recommends --no-install-suggests -y \
+RUN apt-get update && apt-get install gnupg curl ca-certificates --no-install-recommends --no-install-suggests -y \
     && curl -O https://nginx.org/keys/nginx_signing.key && apt-key add ./nginx_signing.key
 
-RUN echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list \
+RUN echo "deb http://nginx.org/packages/debian/ stretch nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 						ca-certificates \
-						nginx=${NGINX_VERSION} \
+						nginx \
 						nginx-module-xslt \
 						nginx-module-geoip \
 						nginx-module-image-filter \
